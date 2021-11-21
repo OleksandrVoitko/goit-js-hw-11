@@ -2,10 +2,6 @@ import axios from 'axios';
 
 axios.defaults.baseURL = 'https://pixabay.com/api';
 
-const refs = {
-  loadMoreBtn: document.querySelector('.load-more'),
-};
-
 export default class ApiSearch {
   constructor() {
     this.searchQuery = '';
@@ -23,7 +19,6 @@ export default class ApiSearch {
 
       this.incrementPage();
 
-      refs.loadMoreBtn.removeAttribute('disabled');
       return query.data;
     });
   }

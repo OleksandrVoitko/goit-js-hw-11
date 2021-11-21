@@ -31,20 +31,24 @@ function onSearch(event) {
   }
 
   apiSearch.resetPage();
-  apiSearch.searchPhotos().then(searchedPhotos => {
-    totalHits = searchedPhotos.totalHits - apiSearch.per_page;
+  apiSearch
+    .searchPhotos()
+    .then(searchedPhotos => {
+      totalHits = searchedPhotos.totalHits - apiSearch.per_page;
 
-    clearCardMarkup();
-    appendCardMarkup(searchedPhotos.hits);
+      clearCardMarkup();
+      appendCardMarkup(searchedPhotos.hits);
 
-    Notify.info(`Hooray! We found ${searchedPhotos.totalHits} images.`);
+      Notify.info(`Hooray! We found ${searchedPhotos.totalHits} images.`);
 
-    refs.loadMoreBtn.classList.remove('is-hidden');
+      refs.loadMoreBtn.classList.remove('is-hidden');
+      refs.loadMoreBtn.removeAttribute('disabled');
 
-    let gallery = new SimpleLightbox('.gallery a');
-  }).catch(() => Notify.failure(
-    'Sorry, there are no images matching your search query. Please try again.',
-  ));
+      let gallery = new SimpleLightbox('.gallery a');
+    })
+    .catch(() =>
+      Notify.failure('Sorry, there are no images matching your search query. Please try again.'),
+    );
 }
 
 function onLoadMore() {
