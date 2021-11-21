@@ -42,7 +42,9 @@ function onSearch(event) {
     refs.loadMoreBtn.classList.remove('is-hidden');
 
     let gallery = new SimpleLightbox('.gallery a');
-  });
+  }).catch(() => Notify.failure(
+    'Sorry, there are no images matching your search query. Please try again.',
+  ));
 }
 
 function onLoadMore() {

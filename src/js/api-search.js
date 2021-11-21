@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 axios.defaults.baseURL = 'https://pixabay.com/api';
 
@@ -19,9 +18,7 @@ export default class ApiSearch {
 
     return await axios.get(url).then(query => {
       if (query.data.total === 0) {
-        return Notify.failure(
-          'Sorry, there are no images matching your search query. Please try again.',
-        );
+        return;
       }
 
       this.incrementPage();
