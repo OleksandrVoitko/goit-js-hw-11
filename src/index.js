@@ -21,6 +21,7 @@ refs.loadMoreBtn.addEventListener('click', onLoadMore);
 function onSearch(event) {
   event.preventDefault();
 
+  refs.loadMoreBtn.classList.add('is-hidden');
   refs.loadMoreBtn.setAttribute('disabled', true);
 
   const searchWord = event.currentTarget.elements.searchQuery.value;
