@@ -46,6 +46,7 @@ function onSearch(event) {
 }
 
 function onLoadMore() {
+  refs.loadMoreBtn.classList.add('is-hidden');
   apiSearch.searchPhotos().then(searchedPhotos => {
     appendCardMarkup(searchedPhotos.hits);
     if (searchedPhotos.totalHits < refs.divGallery.children.length) {
@@ -53,6 +54,7 @@ function onLoadMore() {
 
       return Notify.failure("We're sorry, but you've reached the end of search results.");
     }
+    refs.loadMoreBtn.classList.remove('is-hidden');
     let gallery = new SimpleLightbox('.gallery a');
   });
 }
