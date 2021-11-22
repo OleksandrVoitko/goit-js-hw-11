@@ -15,6 +15,7 @@ const apiSearch = new ApiSearch();
 
 refs.searchForm.addEventListener('submit', onSearch);
 refs.loadMoreBtn.addEventListener('click', onLoadMore);
+refs.divGallery.addEventListener('click', onGallery);
 
 function onSearch(event) {
   event.preventDefault();
@@ -50,7 +51,7 @@ function onLoadMore() {
   refs.loadMoreBtn.classList.add('is-hidden');
   apiSearch.searchPhotos().then(searchedPhotos => {
     appendCardMarkup(searchedPhotos.hits);
-    if (searchedPhotos.totalHits < refs.divGallery.children.length) {
+    if (searchedPhotos.totalHits <= refs.divGallery.children.length) {
       refs.loadMoreBtn.classList.add('is-hidden');
 
       return Notify.failure("We're sorry, but you've reached the end of search results.");

@@ -23,8 +23,6 @@ export default class ApiSearch {
     });
   }
 
-  totalHits() {}
-
   incrementPage() {
     this.page += 1;
   }
