@@ -11,9 +11,6 @@ const refs = {
 };
 
 const apiSearch = new ApiSearch();
-let totalHits = 0;
-
-refs.loadMoreBtn.setAttribute('disabled', true);
 
 refs.searchForm.addEventListener('submit', onSearch);
 refs.loadMoreBtn.addEventListener('click', onLoadMore);
@@ -22,7 +19,6 @@ function onSearch(event) {
   event.preventDefault();
 
   refs.loadMoreBtn.classList.add('is-hidden');
-  refs.loadMoreBtn.setAttribute('disabled', true);
 
   const searchWord = event.currentTarget.elements.searchQuery.value;
   if (searchWord.trim() === '') {
@@ -35,15 +31,12 @@ function onSearch(event) {
   apiSearch
     .searchPhotos()
     .then(searchedPhotos => {
-      totalHits = searchedPhotos.totalHits - apiSearch.per_page;
-
       clearCardMarkup();
       appendCardMarkup(searchedPhotos.hits);
 
       Notify.info(`Hooray! We found ${searchedPhotos.totalHits} images.`);
 
       refs.loadMoreBtn.classList.remove('is-hidden');
-      refs.loadMoreBtn.removeAttribute('disabled');
 
       let gallery = new SimpleLightbox('.gallery a');
     })
@@ -54,11 +47,9 @@ function onSearch(event) {
 
 function onLoadMore() {
   apiSearch.searchPhotos().then(searchedPhotos => {
-    totalHits = totalHits - apiSearch.per_page;
-
     appendCardMarkup(searchedPhotos.hits);
-    if (totalHits < 0) {
-      refs.loadMoreBtn.setAttribute('disabled', true);
+    if (searchedPhotos.totalHits < refs.divGallery.children.length) {
+      refs.loadMoreBtn.classList.add('is-hidden');
 
       return Notify.failure("We're sorry, but you've reached the end of search results.");
     }
