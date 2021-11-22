@@ -2,6 +2,7 @@ import ApiSearch from './js/api-search';
 import photoCardTpl from './templates/photo-card.hbs';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import SimpleLightbox from 'simplelightbox';
+import 'simplelightbox/dist/simple-lightbox.min.css';
 import './sass/main.scss';
 
 const refs = {
