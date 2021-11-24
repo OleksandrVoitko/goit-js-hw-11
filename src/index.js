@@ -15,7 +15,6 @@ const apiSearch = new ApiSearch();
 
 refs.searchForm.addEventListener('submit', onSearch);
 refs.loadMoreBtn.addEventListener('click', onLoadMore);
-refs.divGallery.addEventListener('click', onGallery);
 
 function onSearch(event) {
   event.preventDefault();
